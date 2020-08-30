@@ -6,11 +6,31 @@ public class App {
     public static void main(String []args) {
         try {
             String fileName = args[0];
-            // kingdome to message mapping
-            HashMap<String, String> kingdomeMessage = getInputsFromFile(fileName);
             Universe universe = populateUniverseWithKingdomes();
-            Kingdome sender = universe.getKingdomeByName("SPACE");
-            System.out.println(kingdomeMessage);
+            ArrayList<Input> kingdomeMessage = getInputsFromFile(fileName, universe);
+            SenderKingdome sender =  universe.getSenderKingdomeByName("SPACE");
+            ArrayList<Kingdome> allies = new ArrayList<Kingdome>();
+            for(Input input : kingdomeMessage) {
+                Kingdome kingdome = input.getKingdome();    
+                String secretMessage = input.getSecretMessage();
+
+                sender.send(kingdome, secretMessage);
+                if(allies.contains(kingdome));
+                else if(kingdome.isAllied(sender)) {
+                    allies.add(kingdome);
+                }
+            }
+            // printing output here
+            if(allies.size() < 3) {
+                System.out.println("NONE");
+                return;
+            }
+
+
+            System.out.print(sender.getName());
+            for(Kingdome kingdome : allies) {
+                System.out.print(" "+kingdome.getName());
+            }
             
         } catch(Exception e) {
             System.out.println("GIVE PROPER FILENAME AS AN INPUT");
@@ -18,52 +38,24 @@ public class App {
     }
     public static Universe populateUniverseWithKingdomes() {
         Universe universeOfSoutheros = new Universe(); 
-        // addKingdome method takes two inputs 1st name of kingdome and 2nd emblem of kingdome.
         universeOfSoutheros.addKingdome("SPACE",    "GORILLA");
         universeOfSoutheros.addKingdome("LAND",     "PANDA");
         universeOfSoutheros.addKingdome("WATER",    "OCTOPUS");
         universeOfSoutheros.addKingdome("ICE",      "MAMMOTH");
         universeOfSoutheros.addKingdome("AIR",      "OWL");
         universeOfSoutheros.addKingdome("FIRE",     "DRAGON");
-
         return universeOfSoutheros;
     }
-
-    // getting input from a given file in below 3 methods.
-    public static HashMap<String, String> getInputsFromFile(String fileName) throws Exception {
-        HashMap<String, String> kingdomeMessage = new HashMap<String, String>();
+    public static ArrayList<Input> getInputsFromFile(String fileName, Universe universe) throws Exception {
         BufferedReader bufferReader = new BufferedReader(new FileReader(fileName));
+        ArrayList<Input> kingdomeMessage = new ArrayList<Input>();
         String line;
         while((line = bufferReader.readLine()) != null) {
-            kingdomeMessage.put(getKingdomeName(line), getSecretMessage(line));
+            String kingdomeName = line.substring(0, line.indexOf(" "));
+            String secretMessage = line.substring(line.indexOf(" ") + 1);
+            Kingdome kingdome = universe.getKingdomeByName(kingdomeName);
+            kingdomeMessage.add(new Input(kingdome, secretMessage));
         }
         return kingdomeMessage;
     }
-    private static String getKingdomeName(String line) {
-        return line.substring(0, line.indexOf(" "));
-    }
-
-    private static String getSecretMessage(String line) {
-        return line.substring(line.indexOf(" ") + 1);
-    }
-
-    /*public static void main(String[] args) {   
-        try {
-            ArrayList<UserInput> inputs = UserInput.getInputsFromFile(args[0]);
-            Resolve resolve = new Resolve(inputs);
-            ArrayList<Kingdome> alliance = resolve.getAllianceArray();
-            if(alliance.size() > 3) {
-                for (Kingdome ally : alliance) {
-                    System.out.print(ally.getKingdomeName()+" ");
-            }
-            System.out.println();
-            }
-            else {
-                System.out.println("NONE");
-            }
-        }
-        catch(Exception e) {
-            System.out.println("please give proper file name");
-        }
-    }*/   
 }

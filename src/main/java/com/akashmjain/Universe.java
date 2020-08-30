@@ -12,10 +12,16 @@ class Universe {
 
     public Kingdome getKingdomeByName(String kingdomeName) {
         for(Kingdome kingdome: kingdomes) {
-            if(kingdome.getName() == kingdomeName) {
+            // System.out.println(kingdome);
+            if(kingdome.getName().equals(kingdomeName)) {
                 return kingdome;
             }
         }
         return new Kingdome();
     }
+    public SenderKingdome getSenderKingdomeByName(String kingdomeName) {
+        Kingdome kingdome = getKingdomeByName(kingdomeName);
+        return new SenderKingdome(kingdome.getName(),kingdome.getEmblem());
+    }
+    @Override public String toString() { return kingdomes.toString(); }
 }
