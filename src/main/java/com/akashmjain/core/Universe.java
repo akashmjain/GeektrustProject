@@ -1,18 +1,18 @@
-package com.akashmjain;
+package com.akashmjain.core;
 import java.util.ArrayList;
-class Universe {
+public class Universe {
     private ArrayList<Kingdome> kingdomes;
-
     public Universe() {
         kingdomes = new ArrayList<Kingdome>();
     }
-    public void addKingdome(String kingdomeName, String kingdomeEmblem) {
-        kingdomes.add(new Kingdome(kingdomeName, kingdomeEmblem));
+    // public void addKingdome(String kingdomeName, String kingdomeEmblem) {
+    //     kingdomes.add(new Kingdome(kingdomeName, kingdomeEmblem));
+    // }
+    public void addKingdome(Kingdome kingdome) { 
+        kingdomes.add(kingdome); 
     }
-
     public Kingdome getKingdomeByName(String kingdomeName) {
         for(Kingdome kingdome: kingdomes) {
-            // System.out.println(kingdome);
             if(kingdome.getName().equals(kingdomeName)) {
                 return kingdome;
             }

@@ -1,51 +1,58 @@
 package com.akashmjain;
+import com.akashmjain.core.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+
+
 public class App {
     public static void main(String []args) {
         try {
-            String fileName = args[0];
-            Universe universe = populateUniverseWithKingdomes();
+            String fileName = args[0]; 
+            Universe universe = populateUniverseWithKingdomes(); 
             ArrayList<Input> kingdomeMessage = getInputsFromFile(fileName, universe);
-            SenderKingdome sender =  universe.getSenderKingdomeByName("SPACE");
-            ArrayList<Kingdome> allies = new ArrayList<Kingdome>();
-            for(Input input : kingdomeMessage) {
-                Kingdome kingdome = input.getKingdome();    
-                String secretMessage = input.getSecretMessage();
 
+
+            SenderKingdome sender =  (SenderKingdome) universe.getKingdomeByName("SPACE");
+            ArrayList<Kingdome> allies = new ArrayList<Kingdome>();
+
+            for(Input input : kingdomeMessage) {
+                ReciverKingdome kingdome = (ReciverKingdome)input.getKingdome();    
+                String secretMessage = input.getSecretMessage();
                 sender.send(kingdome, secretMessage);
                 if(allies.contains(kingdome));
                 else if(kingdome.isAllied(sender)) {
                     allies.add(kingdome);
                 }
+
             }
-            // printing output here
             if(allies.size() < 3) {
                 System.out.println("NONE");
                 return;
             }
-
-
             System.out.print(sender.getName());
             for(Kingdome kingdome : allies) {
                 System.out.print(" "+kingdome.getName());
             }
-            
+            System.out.println();
+
         } catch(Exception e) {
             System.out.println("GIVE PROPER FILENAME AS AN INPUT");
         }
     }
     public static Universe populateUniverseWithKingdomes() {
         Universe universeOfSoutheros = new Universe(); 
-        universeOfSoutheros.addKingdome("SPACE",    "GORILLA");
-        universeOfSoutheros.addKingdome("LAND",     "PANDA");
-        universeOfSoutheros.addKingdome("WATER",    "OCTOPUS");
-        universeOfSoutheros.addKingdome("ICE",      "MAMMOTH");
-        universeOfSoutheros.addKingdome("AIR",      "OWL");
-        universeOfSoutheros.addKingdome("FIRE",     "DRAGON");
+        universeOfSoutheros.addKingdome(new SenderKingdome("SPACE", "GORILLA")); 
+        universeOfSoutheros.addKingdome(new ReciverKingdome("LAND", "PANDA"));
+        universeOfSoutheros.addKingdome(new ReciverKingdome("WATER", "OCTOPUS"));
+        universeOfSoutheros.addKingdome(new ReciverKingdome("ICE", "MAMMOTH"));
+        universeOfSoutheros.addKingdome(new ReciverKingdome("AIR", "OWL"));
+        universeOfSoutheros.addKingdome(new ReciverKingdome("FIRE", "DRAGON"));
         return universeOfSoutheros;
     }
+
+    
     public static ArrayList<Input> getInputsFromFile(String fileName, Universe universe) throws Exception {
         BufferedReader bufferReader = new BufferedReader(new FileReader(fileName));
         ArrayList<Input> kingdomeMessage = new ArrayList<Input>();
