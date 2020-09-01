@@ -12,26 +12,29 @@ public class App {
     public static void main(String []args) {
         try {
             String fileName = args[0]; 
-            Universe universe = populateUniverseWithKingdomes(); 
-            SenderKingdome senderKingdome = (SenderKingdome) universe.getKingdomeByName("SPACE");
-            Resolve resolve = new Resolve(universe, fileName, senderKingdome);
-
+            Universe universe = populateUniverseWithKingdoms(); 
+            SenderKingdom senderKingdom = (SenderKingdom) universe.getKingdomByName("SPACE");
+            Resolve resolve = new Resolve(universe, fileName, senderKingdom);
             System.out.println(resolve);
 
+            test();
 
         } catch(Exception e) {
             System.out.println("GIVE PROPER FILENAME AS AN INPUT");
             System.out.println(e);
         }
     }
-    public static Universe populateUniverseWithKingdomes() {
+    public static void test() {
+    }
+
+    public static Universe populateUniverseWithKingdoms() {
         Universe universeOfSoutheros = new Universe(); 
-        universeOfSoutheros.addKingdome(new SenderKingdome("SPACE", "GORILLA"));
-        universeOfSoutheros.addKingdome(new ReciverKingdome("LAND", "PANDA"));
-        universeOfSoutheros.addKingdome(new ReciverKingdome("WATER", "OCTOPUS"));
-        universeOfSoutheros.addKingdome(new ReciverKingdome("ICE", "MAMMOTH"));
-        universeOfSoutheros.addKingdome(new ReciverKingdome("AIR", "OWL"));
-        universeOfSoutheros.addKingdome(new ReciverKingdome("FIRE", "DRAGON"));
+        universeOfSoutheros.addKingdom(new SenderKingdom("SPACE", "GORILLA"));
+        universeOfSoutheros.addKingdom(new ReciverKingdom("LAND", "PANDA"));
+        universeOfSoutheros.addKingdom(new ReciverKingdom("WATER", "OCTOPUS"));
+        universeOfSoutheros.addKingdom(new ReciverKingdom("ICE", "MAMMOTH"));
+        universeOfSoutheros.addKingdom(new ReciverKingdom("AIR", "OWL"));
+        universeOfSoutheros.addKingdom(new ReciverKingdom("FIRE", "DRAGON"));
         return universeOfSoutheros;
     }
 }

@@ -8,14 +8,14 @@ public class AppTest {
     @Test 
     public void testReciversIsAlliedMethod() {
         // test case for sending and reciving and checking messages.
-        ReciverKingdome reciverKingdome = new ReciverKingdome("LAND", "PANDA");
-        SenderKingdome kingdome = new SenderKingdome("SPACE", "GORILLA");
-        assertEquals(false, reciverKingdome.isAllied(kingdome));
+        ReciverKingdom reciverKingdom = new ReciverKingdom("LAND", "PANDA");
+        SenderKingdom kingdom = new SenderKingdom("SPACE", "GORILLA");
+        assertEquals(false, reciverKingdom.isAllied(kingdom));
 
         String secretMessage = "FDIXXSOKKOFBBMU";
-        kingdome.send(reciverKingdome, secretMessage);
+        kingdom.send(reciverKingdom, secretMessage);
 
-        assertEquals(true, reciverKingdome.isAllied(kingdome));
+        assertEquals(true, reciverKingdom.isAllied(kingdom));
     }
 
     @Test 
@@ -34,6 +34,5 @@ public class AppTest {
         String plainText = cipher.getEncryptedData();
         assertEquals(true, plainText.equals("ROZO"));
     }
-
-
+    
 }

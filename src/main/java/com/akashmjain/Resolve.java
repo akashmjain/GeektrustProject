@@ -5,87 +5,49 @@ import java.io.*;
 import java.util.ArrayList;
 class Resolve {
     private Universe universe;
-    private SenderKingdome senderKingdome;
+    private SenderKingdom senderKingdom;
     private ArrayList<Input> inputData;
-    private ArrayList<Kingdome> alliance;
-    public Resolve(Universe universe, String fileName, SenderKingdome senderKingdome) throws Exception { 
+    private ArrayList<Kingdom> alliance;
+
+
+    public Resolve(Universe universe, String fileName, SenderKingdom senderKingdom) throws Exception { 
         this.universe = universe; 
-        this.senderKingdome = senderKingdome;
+        this.senderKingdom = senderKingdom;
         this.inputData =  getInputsFromFile(fileName);
-        this.alliance = getAllianceArray(senderKingdome);
+        this.alliance = getAllianceArray();
     }
-    private ArrayList<Kingdome> getAllianceArray(SenderKingdome senderKingdome) throws Exception {
+
+    private ArrayList<Kingdom> getAllianceArray() throws Exception {
         for(Input input: inputData) {
-            ReciverKingdome reciverKingdome = (ReciverKingdome) input.getKingdome();
+            ReciverKingdom reciverKingdom = (ReciverKingdom) input.getKingdom();
             String secretMessage = input.getSecretMessage();
-            senderKingdome.send(reciverKingdome, secretMessage);
+            senderKingdom.send(reciverKingdom, secretMessage);
         }
-        return senderKingdome.getAllianceArray();
+        return senderKingdom.getAllianceArray();
     }
 
     private ArrayList<Input> getInputsFromFile(String fileName) throws Exception {
         BufferedReader bufferReader = new BufferedReader(new FileReader(fileName));
-        ArrayList<Input> kingdomeMessage = new ArrayList<Input>();
+        ArrayList<Input> kingdomMessage = new ArrayList<Input>();
         String line;
         while((line = bufferReader.readLine()) != null) {
-            String kingdomeName = line.substring(0, line.indexOf(" "));
+            String kingdomName = line.substring(0, line.indexOf(" "));
             String secretMessage = line.substring(line.indexOf(" ") + 1);
-            Kingdome kingdome = universe.getKingdomeByName(kingdomeName);
-            kingdomeMessage.add(new Input(kingdome, secretMessage));
+            Kingdom kingdom = universe.getKingdomByName(kingdomName);
+            kingdomMessage.add(new Input(kingdom, secretMessage));
         }
-        return kingdomeMessage;
+        return kingdomMessage;
     }
+
+
     @Override
     public String toString() {
-        String data = senderKingdome.getName() + " ";
-        for(Kingdome kingdome : alliance) {
-            data += kingdome.getName() + " ";
+        if(alliance.size() < 3) return "NULL";
+
+        String data = senderKingdom.getName() + " ";
+        for(Kingdom kingdom : alliance) {
+            data += kingdom.getName() + " ";
         }
-        data += '\n';
-        return data;   
+        return data;
     }
 }
-
-// package com.akashmjain;
-// import com.akashmain.core.*;
-// import java.util.*;
-
-// public class Resolve {
-//     private Universe universe;
-//     private ArrayList<Input> kingdomeMessage;
-//     private ArrayList<Kingdome> alliance;
-//     public Resolve(Universe universe) {
-//         this.universe = universe;
-//     }
-
-//     public void getInputsFromFile(String fileName) throws Exception {
-//         BufferedReader bufferReader = new BufferedReader(new FileReader(fileName));
-//         // ArrayList<Input> kingdomeMessage = new ArrayList<Input>();
-//         String line;
-//         while((line = bufferReader.readLine()) != null) {
-//             String kingdomeName = line.substring(0, line.indexOf(" "));
-//             String secretMessage = line.substring(line.indexOf(" ") + 1);
-//             Kingdome kingdome = universe.getKingdomeByName(kingdomeName);
-//             kingdomeMessage.add(new Input(kingdome, secretMessage));
-//         }
-//     }
-//     @Override
-//     public String toString() {
-//         SenderKingdome sender =  (SenderKingdome) universe.getKingdomeByName("SPACE");
-//         // ArrayList<Kingdome> allies = new ArrayList<Kingdome>();
-
-//         for(Input input : kingdomeMessage) {
-//             ReciverKingdome kingdome = (ReciverKingdome)input.getKingdome();    
-//             String secretMessage = input.getSecretMessage();
-//             sender.send(kingdome, secretMessage);
-//         }
-//         alliance = sender.getAllianceArray();
-//         if(alliance.size() < 3) {
-//             // System.out.println("NONE");
-//             return "NONE";
-//         }
-//         return alliance.toString();
-        
-//         // System.out.println();
-//     }
-// }

@@ -1,14 +1,14 @@
 package com.akashmjain.input_formatting;
-import  com.akashmjain.core.Kingdome;
+import  com.akashmjain.core.Kingdom;
 
 public class Input {
-    private Kingdome kingdome;
+    private Kingdom kingdom;
     private String secretMessage;
-    public Input(Kingdome kingdome, String secretMessage) {
-        this.kingdome = kingdome;
+    public Input(Kingdom kingdom, String secretMessage) {
+        this.kingdom = kingdom;
         this.secretMessage = secretMessage;
     }
-    public Kingdome getKingdome() { return kingdome; }
+    public Kingdom getKingdom() { return kingdom; }
     public String getSecretMessage() { return secretMessage; }
-    @Override public String toString() { return kingdome + " : " + secretMessage; }
+    @Override public String toString() { return kingdom + " : " + secretMessage; }
 }

@@ -1,23 +1,20 @@
 package com.akashmjain.core;
 import java.util.ArrayList;
 public class Universe {
-    private ArrayList<Kingdome> kingdomes;
+    private ArrayList<Kingdom> kingdoms;
     public Universe() {
-        kingdomes = new ArrayList<Kingdome>();
+        kingdoms = new ArrayList<Kingdom>();
     }
-    // public void addKingdome(String kingdomeName, String kingdomeEmblem) {
-    //     kingdomes.add(new Kingdome(kingdomeName, kingdomeEmblem));
-    // }
-    public void addKingdome(Kingdome kingdome) { 
-        kingdomes.add(kingdome);
+    public void addKingdom(Kingdom kingdom) { 
+        kingdoms.add(kingdom);
     }
-    public Kingdome getKingdomeByName(String kingdomeName) {
-        for(Kingdome kingdome: kingdomes) {
-            if(kingdome.getName().equals(kingdomeName)) {
-                return kingdome;
+    public Kingdom getKingdomByName(String kingdomName) {
+        for(Kingdom kingdom: kingdoms) {
+            if(kingdom.getName().equals(kingdomName)) {
+                return kingdom;
             }
         }
-        return new Kingdome();
+        return new Kingdom();
     }
-    @Override public String toString() { return kingdomes.toString(); }
+    @Override public String toString() { return kingdoms.toString(); }
 }

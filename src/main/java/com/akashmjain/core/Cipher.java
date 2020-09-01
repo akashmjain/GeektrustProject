@@ -22,6 +22,7 @@ public class Cipher {
         }
         this.encryptedData = encryptedMessage;
     }
+    
     public void seasarCipherDecryptionAlgorithm(String key, String message) {
         String decryptedMessage = "";
         int len = key.length();
