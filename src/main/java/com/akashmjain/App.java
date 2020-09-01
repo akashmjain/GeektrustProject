@@ -21,7 +21,7 @@ public class App {
 
         } catch(Exception e) {
             System.out.println("GIVE PROPER FILENAME AS AN INPUT");
-            System.out.println(e);
+
         }
     }
     public static void test() {
