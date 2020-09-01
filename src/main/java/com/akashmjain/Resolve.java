@@ -42,7 +42,7 @@ class Resolve {
 
     @Override
     public String toString() {
-        if(alliance.size() < 3) return "NULL";
+        if(alliance.size() < 3) return "NONE";
 
         String data = senderKingdom.getName() + " ";
         for(Kingdom kingdom : alliance) {
