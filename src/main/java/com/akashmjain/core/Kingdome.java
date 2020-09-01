@@ -3,10 +3,7 @@ package com.akashmjain.core;
 public class Kingdome {
     private String name;
     private String emblem;
-    // private String secretMessage;
-    // private SenderKingdome senderKingdome;
-
-
+    // need this constructor in case of Universe 
     public Kingdome() {}
     public Kingdome(String name, String emblem) {
         this.name = name;

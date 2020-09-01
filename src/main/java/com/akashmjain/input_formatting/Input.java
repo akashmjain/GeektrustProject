@@ -1,6 +1,7 @@
-package com.akashmjain;
+package com.akashmjain.input_formatting;
 import  com.akashmjain.core.Kingdome;
-class Input {
+
+public class Input {
     private Kingdome kingdome;
     private String secretMessage;
     public Input(Kingdome kingdome, String secretMessage) {

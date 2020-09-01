@@ -9,7 +9,7 @@ public class Universe {
     //     kingdomes.add(new Kingdome(kingdomeName, kingdomeEmblem));
     // }
     public void addKingdome(Kingdome kingdome) { 
-        kingdomes.add(kingdome); 
+        kingdomes.add(kingdome);
     }
     public Kingdome getKingdomeByName(String kingdomeName) {
         for(Kingdome kingdome: kingdomes) {
@@ -18,10 +18,6 @@ public class Universe {
             }
         }
         return new Kingdome();
-    }
-    public SenderKingdome getSenderKingdomeByName(String kingdomeName) {
-        Kingdome kingdome = getKingdomeByName(kingdomeName);
-        return new SenderKingdome(kingdome.getName(),kingdome.getEmblem());
     }
     @Override public String toString() { return kingdomes.toString(); }
 }
