@@ -1,5 +1,5 @@
 # GeektrustProject
-This is akashmjain in this repository i am working on Tame Of Thrones, a problem by Geektrust.in 
+This is akashmjain in this repository i am working on [Tame Of Thrones](https://www.geektrust.in/coding-problem/backend/tame-of-thrones), a problem by Geektrust.in 
 ### get the code working
 To execute the following project simply go to the project directory and execute the following commands.
 ```bash
